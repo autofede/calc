@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>document</title>
+  <style>
+    body {
+      background-color: #eee;
+    }
+
+    #calculator {
+      margin: 100px 0 0 150px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="calculator">
+    <p>
+      <input type="text" class="formerInput" value="1" />
+      <span class="sign">+</span>
+      <input type="text" class="laterInput" value="1" />
+      <span>=</span>
+      <span class="resultOutput">2</span>
+    </p>
+    <p>
+      <input type="button" value="+" class="btn" title="add" />
+      <input type="button" value="-" class="btn" title="sub" />
+      <input type="button" value="*" class="btn" title="multiply" />
+      <input type="button" value="/" class="btn" title="divide" />
+      <input type="button" value="%" class="btn" title="mod" />
+      <input type="button" value="^" class="btn" title="power" />
+    </p>
+  </div>
+
+  <script>
+    var wrapElem = document.querySelector('#calculator');
+    var calculatorElem = {
+      formerInput: wrapElem.querySelector('.formerInput'),
+      laterInput: wrapElem.querySelector('.laterInput'),
+      sign: wrapElem.querySelector('.sign'),
+      resultOutput: wrapElem.querySelector('.resultOutput'),
+      btns: wrapElem.querySelectorAll('.btn')
+    }
+
+    each(calculatorElem.btns, function (index, elem) {
+      elem.onclick = function () {
+        updateSign(this.value);
+        outputResult(operate(this.title,calculatorElem.formerInput.value, calculatorElem.laterInput.value));
+      }
+    })
+
+    function each(array, fn) {
+      for (var i = 0; i < array.length; i++) {
+        fn(i, array[i]);
+      }
+    }
+
+    function updateSign(symbol) {
+      calculatorElem.sign.innerHTML = symbol;
+    }
+
+    function operate(name, num1, num2){
+      if(!operation[name]) throw new Error('不存在名为'+ name + '的方法');
+      return operation[name](num1, num2);
+    }
+
+    var operation = {
+      add: function(num1, num2) {
+        return +num1 + +num2;
+      },
+      sub: function(num1, num2) {
+        return num1 - num2;
+      },
+      multiply: function(num1, num2) {
+        return num1 * num2;
+      },
+      divide: function(num1, num2) {
+        return num1 / num2;
+      },
+      addOperation: function(name, fn){
+        if(!this[name]){
+          this[name] = fn;
+        }
+        return this;
+      }
+    }
+
+    operation.addOperation('mod', function(num1, num2){
+      return num1 % num2;
+    }).addOperation('power', function(num1, num2){
+      return Math.pow(num1,num2);
+    })
+
+    function outputResult(result) {
+      calculatorElem.resultOutput.innerHTML = result;
+    }
+  </script>
+</body>
+
+</html>

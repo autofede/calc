@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>document</title>
+  <style>
+    body {
+      background-color: #eee;
+    }
+
+    #calculator {
+      margin: 100px 0 0 150px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="calculator">
+    <p>
+      <input type="text" class="formerInput" value="1" />
+      <span class="sign">+</span>
+      <input type="text" class="laterInput" value="1" />
+      <span>=</span>
+      <span class="resultOutput">2</span>
+    </p>
+    <p>
+      <input type="button" value="+" class="btn" title="add" />
+      <input type="button" value="-" class="btn" title="sub" />
+      <input type="button" value="*" class="btn" title="multiply" />
+      <input type="button" value="/" class="btn" title="divide" />
+    </p>
+  </div>
+
+  <script>
+    var calculator = document.querySelector('#calculator');
+    var formerInput = calculator.querySelector('.formerInput');
+    var laterInput = calculator.querySelector('.laterInput');
+    var sign = calculator.querySelector('.sign');
+    var resultOutput = calculator.querySelector('.resultOutput');
+    var btns = calculator.querySelectorAll('.btn');
+
+    for (var i = 0; i < btns.length; i++) {
+      btns[i].onclick = function () {
+        switch (this.title) {
+          case 'add':
+            addHandler();
+            break;
+          case 'sub':
+            subHandler();
+            break;
+          case 'multiply':
+            multiplyHandler();
+            break;
+          case 'divide':
+            divideHandler();
+            break;
+        }
+      }
+    }
+
+    function addHandler() {
+      sign.innerHTML = '+';
+      resultOutput.innerHTML = +formerInput.value + +laterInput.value;
+    }
+    function subHandler() {
+      sign.innerHTML = '-';
+      resultOutput.innerHTML = formerInput.value - laterInput.value;
+    }
+
+    function multiplyHandler() {
+      sign.innerHTML = '*';
+      resultOutput.innerHTML = formerInput.value * laterInput.value;
+    }
+
+    function divideHandler() {
+      sign.innerHTML = '/';
+      resultOutput.innerHTML = formerInput.value / laterInput.value;
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>document</title>
+  <style>
+    body{
+      background-color: #eee;
+    }#calculator{
+      margin: 100px 0 0 150px;
+    }
+  </style>
+</head>
+<body>
+<div id="calculator">
+  <p>
+    <input type="text" class="formerInput" value="1"/>
+    <span class="sign">+</span>
+    <input type="text" class="laterInput" value="1"/>
+    <span>=</span>
+    <span class="resultOutput">2</span>
+  </p>
+  <p>
+    <input type="button" value="+" onclick="addHandler();"/>
+    <input type="button" value="-" onclick="subHandler();"/>
+    <input type="button" value="*" onclick="multiplyHandler();"/>
+    <input type="button" value="/" onclick="divideHandler();"/>
+  </p>
+</div>
+
+<script>
+  var calculator = document.querySelector('#calculator');
+  var formerInput = calculator.querySelector('.formerInput');
+  var laterInput = calculator.querySelector('.laterInput');
+  var sign = calculator.querySelector('.sign');
+  var resultOutput = calculator.querySelector('.resultOutput');
+
+function addHandler(){
+  sign.innerHTML = '+';
+  resultOutput.innerHTML = +formerInput.value + +laterInput.value;
+}
+
+function subHandler(){
+  sign.innerHTML = '-';
+  resultOutput.innerHTML = formerInput.value - laterInput.value;
+}
+
+function multiplyHandler(){
+  sign.innerHTML = '*';
+  resultOutput.innerHTML = formerInput.value * laterInput.value;
+}
+
+function divideHandler(){
+  sign.innerHTML = '/';
+  resultOutput.innerHTML = formerInput.value / laterInput.value;
+}
+</script>
+</body>
+</html>
